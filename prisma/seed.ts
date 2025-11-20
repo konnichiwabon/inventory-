@@ -1,4 +1,4 @@
-    import {PrismaClient} from "@prisma/client";
+import {PrismaClient} from "@prisma/client";
 
     const prisma = new PrismaClient();
 
@@ -13,7 +13,7 @@
             price: parseFloat((Math.random() * 90 + 10).toFixed(2)),
             quantity: Math.floor(Math.random() * 20),
             lowStockAt: 5,
-            createAt: new Date(Date.now() - 10000 * 60 * 60 * 24 * (i * 5)),
+            createdAt: new Date(Date.now() - 10000 * 60 * 60 * 24 * (i * 5)),
             })),
         });
     }
@@ -25,5 +25,4 @@
         })
         .finally(async () => {
             await prisma.$disconnect();
-        }); 
- 
+        });

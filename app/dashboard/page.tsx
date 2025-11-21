@@ -39,7 +39,7 @@ export default async function DashboardPage() {
 
   const inStockCount = allProducts.filter((p) => Number(p.quantity) > 5).length;
   const lowStockCount = allProducts.filter(
-    (p) => Number(p.quantity) <= 5 && Number(prisma.quantity) >= 5
+    (p) => Number(p.quantity) <= 5 && Number(p.quantity) >= 5
   ).length;
 
   const outOfStockCount = allProducts.filter(
@@ -271,19 +271,18 @@ export default async function DashboardPage() {
                   <div className="w-3 h-3 rounded-full bg-purple-200" />
                   <span>In Stock ({inStockPercentage}%)</span>
                 </div>
+              </div>
+              <div className="flex items-center justify-between text-sm text-gray-600">
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 rounded-full bg-purple-600" />
+                  <span>Low Stock ({lowStockPercentage}%)</span>
                 </div>
-                <div className="flex items-center justify-between text-sm text-gray-600">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 rounded-full bg-purple-600" />
-                    <span>Low Stock ({lowStockPercentage}%)</span>
-                  </div>
+              </div>
+              <div className="flex items-center justify-between text-sm text-gray-600">
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 rounded-full bg-gray-200" />
+                  <span>Out of Stock ({outOfStockPercentage}%)</span>
                 </div>
-                <div className="flex items-center justify-between text-sm text-gray-600">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 rounded-full bg-gray-200" />
-                    <span>Out of Stock ({outOfStockPercentage}%)</span>
-                  </div>
-      
               </div>
             </div>
           </div>
@@ -291,4 +290,4 @@ export default async function DashboardPage() {
       </main>
     </div>
   );
-}       
+}

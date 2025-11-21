@@ -28,18 +28,18 @@ export default async function DashboardPage() {
     orderBy: { createdAt: "desc" },
     take: 5,
   });
-  console.log(recent);
+
 
   const totalValue = allProducts.reduce(
     (sum, product) => sum + Number(product.price) * Number(product.quantity),
     0
   );
 
-  console.log(totalValue);
+
 
   const inStockCount = allProducts.filter((p) => Number(p.quantity) > 5).length;
   const lowStockCount = allProducts.filter(
-    (p) => Number(p.quantity) <= 5 && Number(prisma.quantity) >= 5
+    (p) => Number(p.quantity) <= 5 && Number(p.quantity) >= 5
   ).length;
 
   const outOfStockCount = allProducts.filter(
@@ -48,11 +48,11 @@ export default async function DashboardPage() {
 
   // Calculate percentage of products in stock
   const inStockPercentage =
-    totalProducts > 0 ? Math.round(inStockCount / totalProducts) * 100 : 0;
+    totalProducts > 0 ? Math.round((inStockCount / totalProducts) * 100) : 0;
   const lowStockPercentage =
-    totalProducts > 0 ? Math.round(lowStockCount / totalProducts) * 100 : 0;
+    totalProducts > 0 ? Math.round((lowStockCount / totalProducts) * 100) : 0;
   const outOfStockPercentage =
-    totalProducts > 0 ? Math.round(outOfStockCount / totalProducts) * 100 : 0;
+    totalProducts > 0 ? Math.round((outOfStockCount / totalProducts) * 100) : 0;
 
   /**
    * Generates a dataset of product creation counts for the past 12 weeks.
@@ -271,19 +271,18 @@ export default async function DashboardPage() {
                   <div className="w-3 h-3 rounded-full bg-purple-200" />
                   <span>In Stock ({inStockPercentage}%)</span>
                 </div>
+              </div>
+              <div className="flex items-center justify-between text-sm text-gray-600">
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 rounded-full bg-purple-600" />
+                  <span>Low Stock ({lowStockPercentage}%)</span>
                 </div>
-                <div className="flex items-center justify-between text-sm text-gray-600">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 rounded-full bg-purple-600" />
-                    <span>Low Stock ({lowStockPercentage}%)</span>
-                  </div>
+              </div>
+              <div className="flex items-center justify-between text-sm text-gray-600">
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 rounded-full bg-gray-200" />
+                  <span>Out of Stock ({outOfStockPercentage}%)</span>
                 </div>
-                <div className="flex items-center justify-between text-sm text-gray-600">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 rounded-full bg-gray-200" />
-                    <span>Out of Stock ({outOfStockPercentage}%)</span>
-                  </div>
-      
               </div>
             </div>
           </div>
@@ -291,4 +290,4 @@ export default async function DashboardPage() {
       </main>
     </div>
   );
-}       
+}
